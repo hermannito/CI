@@ -22,7 +22,7 @@ stages:
   environment:
     url: https://$DOMAIN
 
-build:
+.build:
   # Official docker image.
   stage: Build image
   script:
@@ -33,7 +33,7 @@ build:
       - alpinehelloworld.tar
 
 
-test acceptation:
+.test acceptation:
   # Official docker image.
   stage: Test acceptation
   script:
@@ -43,7 +43,7 @@ test acceptation:
     - apk --no-cache add curl
     - curl "http://docker" | grep -q "Hello world!"
 
-release image:
+.release image:
   stage: Release image
   script:
     - docker load < alpinehelloworld.tar
