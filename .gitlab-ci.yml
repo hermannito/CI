@@ -21,11 +21,12 @@ test acceptation:
   image: docker:latest
   stage: Test acceptation
   services:
-    - docker:dind
+    - name: docker:dind
+      alias: docker
   script:
     - docker load < alpinehelloworld.tar
-    - docker run -d -p 80:80 -e PORT=80 --name webapp alpinehelloworld
+    - docker run -d -p 80:5000 -e PORT=500 --name webapp alpinehelloworld
     - sleep 5
     - apk --no-cache add curl
-    - curl "http://localhost" | grep -q "Hello world!"
+    - curl "http://docker" | grep -q "Hello world!"
 
