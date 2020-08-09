@@ -1,5 +1,4 @@
 image: docker:latest
-  stage: Test acceptation
 services:
   - name: docker:dind
     alias: docker
