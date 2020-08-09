@@ -10,19 +10,9 @@ stages:
   - Deploy review
   - Stop review
   - Deploy staging
-  - Test staging
   - Deploy prod
-  - Test prod
 
-.test_template: &test
-  only:
-    - master
-  script:
-    - curl "https://$DOMAIN" | grep -q "Hello world!"
-  environment:
-    url: https://$DOMAIN
-
-.build:
+build:
   # Official docker image.
   stage: Build image
   script:
@@ -33,7 +23,7 @@ stages:
       - alpinehelloworld.tar
 
 
-.test acceptation:
+test acceptation:
   # Official docker image.
   stage: Test acceptation
   script:
@@ -43,7 +33,7 @@ stages:
     - apk --no-cache add curl
     - curl "http://docker" | grep -q "Hello world!"
 
-.release image:
+release image:
   stage: Release image
   script:
     - docker load < alpinehelloworld.tar
@@ -113,20 +103,3 @@ stop review:
     - npm install -g heroku
     - heroku container:login
     - heroku apps:destroy -a eazytraining-$CI_COMMIT_REF_NAME -c eazytraining-$CI_COMMIT_REF_NAME
-
-
-test staging:
-  <<: *test
-  stage: Test staging
-  variables:
-    DOMAIN: eazytraining-staging.herokuapp.com
-  environment:
-    name: staging
-
-test prod:
-  <<: *test
-  stage: Test prod
-  variables:
-    DOMAIN: eazytraining-prod.herokuapp.com
-  environment:
-    name: prod
