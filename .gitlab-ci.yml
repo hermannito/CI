@@ -36,7 +36,6 @@ release image:
     - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker images
     - docker push "${CI_REGISTRY_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${CI_REGISTRY_NAME}:${CI_COMMIT_SHORT_SHA}"
 
