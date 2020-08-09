@@ -8,6 +8,7 @@ stages:
   - Test acceptation
   - Release image
   - Deploy review
+  - Stop review
   - Deploy staging
   - Deploy prod
 
@@ -76,6 +77,7 @@ deploy review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://eazytraining-$CI_COMMIT_REF_NAME.herokuapp.com
+    on_stop: stop review
   only:
     - merge_requests
   script:
@@ -85,3 +87,19 @@ deploy review:
     - heroku create eazytraining-$CI_COMMIT_REF_NAME  || echo "project already exist"
     - heroku container:push -a eazytraining-$CI_COMMIT_REF_NAME web
     - heroku container:release -a eazytraining-$CI_COMMIT_REF_NAME web
+
+stop review:
+  stage: Stop review
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  only:
+    - merge_requests
+  when: manual
+  script:
+    - apk --no-cache add npm
+    - npm install -g heroku
+    - heroku container:login
+    - heroku apps:destroy -a eazytraining-$CI_COMMIT_REF_NAME
