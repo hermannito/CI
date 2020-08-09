@@ -27,7 +27,5 @@ test acceptation:
     - docker run -d -p 80:80 -e PORT=80 --name webapp alpinehelloworld
     - sleep 5
     - apk --no-cache add curl
-    - docker ps -a
-    - docker logs webapp
     - curl "http://localhost" | grep -q "Hello world!"
 
