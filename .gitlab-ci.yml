@@ -102,4 +102,4 @@ stop review:
     - apk --no-cache add npm
     - npm install -g heroku
     - heroku container:login
-    - heroku apps:destroy -a eazytraining-$CI_COMMIT_REF_NAME
+    - heroku apps:destroy -a eazytraining-$CI_COMMIT_REF_NAME --confirm=confirm
