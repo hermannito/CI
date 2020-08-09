@@ -6,38 +6,24 @@ services:
 stages:
   - Build image
   - Test acceptation
-  - Release image
 
 build:
   # Official docker image.
   stage: Build image
   script:
-    - docker build -t $IMAGE_NAME .
-    - docker save $IMAGE_NAME > $IMAGE_NAME.tar
+    - docker build -t alpinehelloworld .
+    - docker save alpinehelloworld > alpinehelloworld.tar
   artifacts:
     paths:
-      - $IMAGE_NAME.tar
+      - alpinehelloworld.tar
 
 
 test acceptation:
   # Official docker image.
   stage: Test acceptation
   script:
-    - docker load < ${IMAGE_NAME}.tar
-    - docker run -d -p 80:5000 -e PORT=5000 --name webapp $IMAGE_NAME
+    - docker load < alpinehelloworld.tar
+    - docker run -d -p 80:5000 -e PORT=5000 --name webapp alpinehelloworld
     - sleep 5
     - apk --no-cache add curl
     - curl "http://docker" | grep -q "Hello world!"
-
-release image:
-  stage: Release image
-  script:
-    - docker load < "${IMAGE_NAME}.tar"
-    - docker tag "$IMAGE_NAME" "${CI_REGISTRY_NAME}:${CI_COMMIT_REF_NAME}"
-    - docker tag "$IMAGE_NAME" "${CI_REGISTRY_NAME}:${CI_COMMIT_SHORT_SHA}"
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker push "${CI_REGISTRY_NAME}:${CI_COMMIT_REF_NAME}"
-    - docker push "${CI_REGISTRY_NAME}:${CI_COMMIT_SHORT_SHA}"
-
-
-
