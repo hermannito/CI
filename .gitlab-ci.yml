@@ -16,7 +16,7 @@ build:
     - docker save $IMAGE_NAME > $IMAGE_NAME.tar
   artifacts:
     paths:
-      - $IMAGE.tar
+      - $IMAGE_NAME.tar
 
 
 test acceptation:
