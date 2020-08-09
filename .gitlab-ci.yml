@@ -12,7 +12,7 @@ stages:
   - Deploy staging
   - Test staging
   - Deploy prod
-  - Deploy prod
+  - Test prod
 
 .test_template: &test
   image: alpine
