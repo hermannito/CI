@@ -10,7 +10,17 @@ stages:
   - Deploy review
   - Stop review
   - Deploy staging
+  - Test staging
   - Deploy prod
+  - Test prod
+
+.test_template: &test
+  only:
+    - master
+  script:
+    - curl "https://$DOMAIN" | grep -q "Hello world!"
+  environment:
+    url: https://$DOMAIN
 
 build:
   # Official docker image.
@@ -103,3 +113,20 @@ stop review:
     - npm install -g heroku
     - heroku container:login
     - heroku apps:destroy -a eazytraining-$CI_COMMIT_REF_NAME -c eazytraining-$CI_COMMIT_REF_NAME
+
+
+test staging:
+  <<: *test
+  stage: Test staging
+  variables:
+    DOMAIN: eazytraining-staging.herokuapp.com
+  environment:
+    name: staging
+
+test prod:
+  <<: *test
+  stage: Test prod
+  variables:
+    DOMAIN: eazytraining-prod.herokuapp.com
+  environment:
+    name: prod
