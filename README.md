@@ -1,7 +1,8 @@
+![enter image description here](https://eazytraining.fr/wp-content/uploads/2020/08/CI_CD_pipeline.jpg)
+
 **Gitlab-ci complete pipeline with heroku**
 This repo is used for [gitlab-ci](https://eazytraining.fr/cours/gitlab-ci-cd-pour-devops/) training by [eazytraining](https://eazytraining.fr/)
 Pipeline steps
-![enter image description here](https://eazytraining.fr/wp-content/uploads/2020/08/CI_CD_pipeline.jpg)
 The pipeline is divided in two major steps
 
  1. **CI (Continue Integration)**
@@ -14,5 +15,5 @@ For deployment purpose, we had used a cloud provider Heroku to host our containe
 - Review : Deploy the application for reviewing after PR is created by developpers. We use Gitlab-ci [Dynamic Environment](https://docs.gitlab.com/ee/ci/environments/#configuring-dynamic-environments)
 - Staging : Deploy in staging environment to validate the application before put it in live
 - Production : Go to live with the application
+
 It was a pleasure for us to teach you [DevOps](https://eazytraining.fr/parcours-devops/) with great tools like Gitlab, Heroku, Docker ...
-- 
