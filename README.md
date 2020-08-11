@@ -12,8 +12,8 @@ This step provide the necessary actions to build our artefact
 - **Release/package**: tag and push the image/release on a private registry
  2. **CD (Continue Deployment)**
 For deployment purpose, we had used a cloud provider Heroku to host our containerize application ! It's very easy to use, with the heroku CLI we use token API to automate the provisionning of the environment.
-- Review : Deploy the application for reviewing after PR is created by developpers. We use Gitlab-ci [Dynamic Environment](https://docs.gitlab.com/ee/ci/environments/#configuring-dynamic-environments)
-- Staging : Deploy in staging environment to validate the application before put it in live
-- Production : Go to live with the application
+- **Review** : Deploy the application for reviewing after PR is created by developpers. We use Gitlab-ci [Dynamic Environment](https://docs.gitlab.com/ee/ci/environments/#configuring-dynamic-environments)
+- **Staging** : Deploy in staging environment to validate the application before put it in live
+- **Production** : Go to live with the application
 
 It was a pleasure for us to teach you [DevOps](https://eazytraining.fr/parcours-devops/) with great tools like Gitlab, Heroku, Docker ...
