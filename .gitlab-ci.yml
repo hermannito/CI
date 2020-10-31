@@ -64,10 +64,10 @@ deploy prod:
     - kubectl config set-credentials gitlab-admin --token=${KUBE_TOKEN}
     - kubectl config set-context minikube --cluster=minikube --user=gitlab-admin --namespace default
     - kubectl config use-context minikube
-    - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email=$GITLAB_USER_EMAIL
+    - kubectl --insecure-skip-tls-verify create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email=$GITLAB_USER_EMAIL
     - cat kubernetes/alpinehelloworld.tpl | sed s/REPO/"$CI_PROJECT_NAME/" > kubernetes/alpinehelloworld.yml
     - cat kubernetes/alpinehelloworld.tpl | sed s/USER/"$CI_REGISTRY_USER/" > kubernetes/alpinehelloworld.yml
-    - kubectl apply -f kubernetes
+    - kubectl --insecure-skip-tls-verify apply -f kubernetes
 
 test prod:
   <<: *test
