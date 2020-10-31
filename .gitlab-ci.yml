@@ -62,7 +62,7 @@ deploy prod:
   script:
     - kubectl config set-cluster minikube --server=${KUBE_URL} --certificate-authority="${KUBE_CA_PEM_FILE}"
     - kubectl config set-credentials gitlab-admin --token=${KUBE_TOKEN}
-    - kubectl config set-context minikube --cluster=minikube --user=admin --namespace default
+    - kubectl config set-context minikube --cluster=minikube --user=gitlab-admin --namespace default
     - kubectl config use-context minikube
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_REGISTRY_USER --docker-password=$CI_REGISTRY_PASSWORD --docker-email=$GITLAB_USER_EMAIL
     - cat kubernetes/alpinehelloworld.tpl | sed s/REPO/"$CI_PROJECT_NAME/" > kubernetes/alpinehelloworld.yml
