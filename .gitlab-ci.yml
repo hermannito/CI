@@ -7,7 +7,7 @@ stages:
   - Build image
   - Test acceptation
   - Release image
-  - Deploy review
+  - Deploy prod
   - Test prod
 
 .test_template: &test
