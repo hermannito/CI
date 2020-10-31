@@ -1,6 +1,6 @@
 ![enter image description here](https://eazytraining.fr/wp-content/uploads/2020/08/CI_CD_pipeline.jpg)
 
-**Gitlab-ci: build a complete pipeline with heroku, docker**
+**Gitlab-ci: build a complete Pipeline with heroku, docker**
 
 This repo is used for [gitlab-ci](https://eazytraining.fr/cours/gitlab-ci-cd-pour-devops/) training by [eazytraining](https://eazytraining.fr/)
 Pipeline steps
